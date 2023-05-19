@@ -9,7 +9,7 @@
             "type": "msedge",
             "request": "launch",
             "url": "http://localhost:3000",
-            "webRoot": "${workspaceFolder}/my-app"
+            "webRoot": "${workspaceFolder}/second-app"
         }
     ]
 }

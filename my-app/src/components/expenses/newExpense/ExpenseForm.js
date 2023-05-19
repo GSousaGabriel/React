@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import './expenseForm.css'
+import './ExpenseForm.css'
 
-const expenseForm = (props) => {
+const ExpenseForm = (props) => {
     const [enteredTitle, setenteredTitle] = useState('')
     const [enteredAmount, setenteredAmount] = useState('')
     const [enteredDate, setenteredDate] = useState('')
@@ -93,10 +93,11 @@ const expenseForm = (props) => {
                 </div>
             </div>
             <div className='new-expense__actions'>
+                <button type='button' onClick={props.onClickCancel}> Cancel </button>
                 <button type='submit'> Add expense </button>
             </div>
         </form>
     )
 }
 
-export default expenseForm
+export default ExpenseForm

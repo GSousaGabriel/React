@@ -1,5 +1,5 @@
 import React from 'react';
-import './expenseFilter.css';
+import './ExpenseFilter.css';
 
 const expensesFilter = (props) => {
     const sendFilter = (event) => {

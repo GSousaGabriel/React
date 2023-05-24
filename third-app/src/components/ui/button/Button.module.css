@@ -1,0 +1,10 @@
+.button{
+    padding: 2px;
+    margin-top: 5px;
+    width: 7rem;
+    border-radius: 5px;
+    border: 0px;
+    background-color: purple;
+    font-size: 1.1rem;
+    color: white;
+}

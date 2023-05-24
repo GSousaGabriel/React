@@ -1,62 +1,61 @@
-import { useState } from 'react'
+import { Fragment, useState, useRef } from 'react'
 
 import Card from "../ui/Card"
 import Button from "../ui/button/Button"
 import classes from './AddUser.module.css'
 import ErrorModal from '../ui/Modals/ErrorModal'
+// import Wrapper from '../helpers/Wrapper'
 
 const AddUser = props => {
-    const [username, setUsername] = useState('')
-    const [age, setAge] = useState('')
-    const [error, setError] = useState({})
+    const nameInputRef= useRef()
+    const ageInputRef= useRef()
+    
+    const [error, setError] = useState({canShow: false})
 
     const addUserHandler = event => {
         event.preventDefault()
 
-        if (age < 1) {
+        const name= nameInputRef.current.value
+        const currentAge= ageInputRef.current.value
+
+        if (currentAge < 1) {
             setError({
+                canShow:true,
                 title: "Incorrect age",
                 message: "Please, insert an age older than 1"
             })
             return
-        } else if (username.length < 3) {
+        } else if (name.length < 3) {
             setError({
+                canShow:true,
                 title: "Name is too short",
                 message: "Please, insert a name bigger than 3"
             })
             return
         }
 
-        props.addNewUser({ username, age, id: Math.random() * 100 })
-        setUsername('')
-        setAge('')
+        props.addNewUser({ name, currentAge, id: Math.random() * 100 })
+        nameInputRef.current.value= ''
+        ageInputRef.current.value= ''
     }
 
     const showErrorHandler= ()=>{
-        setError(false)
-    }
-
-    const usernameChangeHandler = event => {
-        setUsername(event.target.value)
-    }
-
-    const ageChangeHandler = event => {
-        setAge(event.target.value)
+        setError({canShow:false})
     }
 
     return (
-        <div>
-            {error && <ErrorModal title={error.title} message={error.message} hideError={showErrorHandler}></ErrorModal>}
+        <Fragment>
+            {error.canShow && <ErrorModal title={error.title} message={error.message} hideError={showErrorHandler}></ErrorModal>}
             <Card className={classes.input}>
                 <form onSubmit={addUserHandler}>
                     <label htmlFor="username">Username</label>
-                    <input type="text" id="username" name="username" onChange={usernameChangeHandler} value={username}></input>
+                    <input type="text" id="username" name="username" ref={nameInputRef}></input>
                     <label htmlFor="age">Age (Years)</label>
-                    <input type="number" id="age" name="age" onChange={ageChangeHandler} value={age}></input>
+                    <input type="number" id="age" name="age" ref={ageInputRef}></input>
                     <Button type="submit">Add user</Button>
                 </form>
             </Card>
-        </div>
+        </Fragment>
     )
 }
 

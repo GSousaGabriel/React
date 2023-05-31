@@ -1,0 +1,16 @@
+.input {
+    border: none;
+    padding: 0.5em;
+}
+
+.input label {
+    text-align: center;
+    margin-right: 0.5em;
+    font-weight: bold;
+}
+
+.input input {
+    border: 1px solid #ccc;
+    font: inherit;
+    width: 2.25em;
+}

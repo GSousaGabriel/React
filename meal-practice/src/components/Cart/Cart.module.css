@@ -44,3 +44,12 @@
   background-color: #8a2b06;
   color: white;
 }
+
+button:disabled,
+button:disabled:hover,
+button:disabled:active{
+  background-color: #ccc !important;
+  color: #292929 !important;
+  border-color: #ccc !important;
+  cursor: not-allowed !important;
+}

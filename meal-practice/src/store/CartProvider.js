@@ -33,14 +33,19 @@ const cartReducer = (state, action) => {
         }
     }
     if (action.type === "DELETE") {
-        const indexItem= state.items.findIndex(item=>item.id===action.item)
-        const updatedItems= state.items.filter(item=>item.id!==action.item)
-        const updatedAmount= state.totalAmount - (state.items[indexItem].amount*state.items[indexItem].price)
+        const indexItem = state.items.findIndex(item => item.id === action.item)
+        const updatedItems = state.items.filter(item => item.id !== action.item)
+        const updatedAmount = state.totalAmount - (state.items[indexItem].amount * state.items[indexItem].price)
         return {
             items: updatedItems,
             totalAmount: +(updatedAmount.toFixed(2))
         }
     }
+
+    if (action.type === "DELETE") {
+        return defaultCartState
+    }
+
     return defaultCartState
 }
 
@@ -61,11 +66,18 @@ const CartProvider = props => {
         })
     }
 
+    const clearCartHandler = id => {
+        dispatchCartAction({
+            type: 'CLEAR'
+        })
+    }
+
     const cartContext = {
         items: cartState.items,
         totalAmount: cartState.totalAmount,
         addItem: addItemToCartHandler,
-        removeItem: removeItemFromCartHandler
+        removeItem: removeItemFromCartHandler,
+        clearCart: clearCartHandler
     }
     return (
         <CartContext.Provider value={cartContext}>

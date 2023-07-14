@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialCartSlice = { showCart: false, items: [] }
+const initialCartSlice = { showCart: false, changed: false, items: [], cartId: null }
 
 const cartSlice = createSlice({
     name: 'cart',
@@ -9,7 +9,12 @@ const cartSlice = createSlice({
         toggleCart(state) {
             state.showCart = !state.showCart
         },
+        setCart(state, action){
+            state.items= action.payload[Object.keys(action.payload)[0]]
+            state.cartId= Object.keys(action.payload)[0]
+        },
         addItem(state, action) {
+            state.changed= true
             const itemIndex = state.items.findIndex(item => item.id === action.payload.id)
 
             if (itemIndex === -1) {
@@ -28,6 +33,7 @@ const cartSlice = createSlice({
             }
         },
         removeItem(state, action) {
+            state.changed= true
             const itemIndex = state.items.findIndex(item => item.id === action.payload)
 
             if (state.items[itemIndex].quantity === 1) {

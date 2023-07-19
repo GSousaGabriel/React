@@ -9,7 +9,7 @@ import useStore from '../../hook-store/store';
 // import { toggleFav } from '../../store/actions/products';
 
 const ProductItem = props => {
-  const dispach= useStore()[1]
+  const dispach= useStore(false)[1]
   // const dispatch = useDispatch();
   // const toggleFavorite= useContext(ProductsContext).toggleFavorite
 
